@@ -22,13 +22,9 @@ if [[ $(uname -m 2> /dev/null) != x86_64 ]]; then
 fi
 
 NAME=trojan
-VERSION=$(curl -fsSL https://api.github.com/repos/trojan-gfw/trojan/releases/latest | grep tag_name | sed -E 's/.*"v(.*)".*/\1/')
-TARBALL="$NAME-$VERSION-linux-amd64.tar.xz"
-DOWNLOADURL="https://github.com/trojan-gfw/$NAME/releases/download/v$VERSION/$TARBALL"
 TMPDIR="$(mktemp -d)"
 INSTALLPREFIX=/usr/local
 SYSTEMDPREFIX=/etc/systemd/system
-
 BINARYPATH="$INSTALLPREFIX/bin/$NAME"
 CONFIGPATH="$INSTALLPREFIX/etc/$NAME/config.json"
 SYSTEMDPATH="$SYSTEMDPREFIX/$NAME.service"
@@ -36,14 +32,31 @@ SYSTEMDPATH="$SYSTEMDPREFIX/$NAME.service"
 echo Entering temp directory $TMPDIR...
 cd "$TMPDIR"
 
-echo Downloading $NAME $VERSION...
-curl -LO --progress-bar "$DOWNLOADURL" || wget -q --show-progress "$DOWNLOADURL"
+echo Downloading $NAME ...
 
-echo Unpacking $NAME $VERSION...
-tar xf "$TARBALL"
+
+PS3='This Node are Premium plan Only?'
+options=("Yes" "No")
+select opt in "${options[@]}"
+do
+    case $opt in
+        "Yes")
+			wget https://github.com/kot4ri/trojan-quickstart/raw/master/E/trojan-linux-amd64.tar.xz
+			break
+            ;;
+        "No")
+			wget https://github.com/kot4ri/trojan-quickstart/raw/master/C/trojan-linux-amd64.tar.xz
+			break
+            ;;
+        *) echo "invalid option $REPLY";;
+    esac
+done
+
+echo Unpacking $NAME ...
+tar xf trojan-linux-amd64.tar.xz
 cd "$NAME"
 
-echo Installing $NAME $VERSION to $BINARYPATH...
+echo Installing $NAME to $BINARYPATH...
 install -Dm755 "$NAME" "$BINARYPATH"
 
 echo Installing $NAME server config to $CONFIGPATH...
