@@ -8,9 +8,9 @@ This script will help you install the trojan binary to `/usr/local/bin`, a templ
 
 - via `curl`
     ```
-    sudo bash -c "$(curl -fsSL https://raw.githubusercontent.com/kot4ti/trojan-quickstart/master/trojan-quickstart.sh)"
+    sudo bash -c "$(curl -fsSL https://raw.githubusercontent.com/kot4ri/trojan-quickstart/master/trojan-quickstart.sh)"
     ```
 - via `wget`
     ```
-    sudo bash -c "$(wget -O- https://raw.githubusercontent.com/kot4ti/trojan-quickstart/master/trojan-quickstart.sh)"
+    sudo bash -c "$(wget -O- https://raw.githubusercontent.com/kot4ri/trojan-quickstart/master/trojan-quickstart.sh)"
     ```
